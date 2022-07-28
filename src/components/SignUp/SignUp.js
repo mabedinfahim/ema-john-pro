@@ -1,9 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import app from '../../firebase.init';
+import { getAuth } from 'firebase/auth';
 
+
+const auth=getAuth(app)
 const SignUp = () => {
-    const [error,setError]=useState("")
+    const [createUserWithEmailAndPassword,user,error]=useCreateUserWithEmailAndPassword(auth)
+    const [signInWithGoogle]=useSignInWithGoogle(auth)
 
     const [email,setEmail]=useState("")
     const handelWithEmail=(event)=>{
@@ -20,12 +26,20 @@ const SignUp = () => {
         setConfirmPassword(event.target.value)
     }
 
-    const handelWithSubmit=()=>{
+    const navigate=useNavigate();
+
+    const handelWithSubmit=(e)=>{
+        e.preventDefault();
         if(password !== confirmPassword){
-            setError("Two password should be match")
             return;
         }
+        createUserWithEmailAndPassword(email,password)
+        navigate("/shop")
     }
+
+    // const handelWithGoogle=()=>{
+    //    signInWithGoogle()
+    // }
     return (
         <div className="flex justify-center items-center py-10">
             <div className="w-[350px] border border-gray-200 bg-white shadow-md rounded-md px-10 py-6">
@@ -48,7 +62,7 @@ const SignUp = () => {
                         <p className='px-6'>Or</p>
                         <div className='bg-gray-500 w-3/6 h-[0.5px]'></div>
                     </div>
-                    <div className='w-full border border-gray-300 px-4 py-2 shadow-md bg-white rounded-md text-center mt-2 flex justify-center items-center'> <img className="w-8 h-8 rounded-full mx-2" src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" alt="" srcset="" /> <p>Continue with Google</p></div>
+                    <button onClick={()=>signInWithGoogle()} className='w-full border border-gray-300 px-4 py-2 shadow-md bg-white rounded-md text-center mt-2 flex justify-center items-center'> <img className="w-8 h-8 rounded-full mx-2" src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" alt="" srcset="" /> <p>Continue with Google</p></button>
                 </form>
             </div>
         </div>

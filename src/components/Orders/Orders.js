@@ -31,7 +31,7 @@ const Orders = () => {
             </div>
             <div className="cart-container">
                 <Cart cart={cart}>
-                        <button onClick={()=>navigate('/inventory')}>Proceed Checkout </button>
+                        <button className="px-2 py-1 text-white bg-yellow-500  rounded-md my-4" onClick={()=>navigate('/inventory')}>Proceed Information </button>
                 </Cart>
             </div>
         </div>

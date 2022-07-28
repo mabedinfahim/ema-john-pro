@@ -1,9 +1,17 @@
+import { getAuth } from 'firebase/auth';
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import app from '../../firebase.init';
 
+const auth=getAuth(app)
 const SignIn = () => {
-    const [error,setError]=useState("")
+    const [signInWithEmailAndPassword,user,error]=useSignInWithEmailAndPassword(auth)
+    const [signInWithGoogle]=useSignInWithGoogle(auth)
+    const navigate=useNavigate();
+    const location=useLocation();
+    const from=location.state?.from?.pathname || "/"
 
     const [email,setEmail]=useState("")
     const handelWithEmail = (event) => {
@@ -15,8 +23,10 @@ const SignIn = () => {
         setPassword(event.target.value)
     }
 
-    const handelWithSubmit=()=>{
-        console.log("Helo")
+    const handelWithSubmit=(e)=>{
+        e.preventDefault()
+        signInWithEmailAndPassword(email,password)
+        navigate(from,{replace:true})
     }
 
     return (
@@ -37,7 +47,7 @@ const SignIn = () => {
                     <p className='px-6'>Or</p>
                     <div className='bg-gray-500 w-3/6 h-[0.5px]'></div>
                 </div>
-                <div className='w-full border border-gray-300 px-4 py-2 shadow-md bg-white rounded-md text-center mt-2 flex justify-center items-center'> <img className="w-8 h-8 rounded-full mx-2" src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" alt="" srcset="" /> <p>Continue with Google</p></div>
+                <button onClick={()=>signInWithGoogle()} className='pointer w-full border border-gray-300 px-4 py-2 shadow-md bg-white rounded-md text-center mt-2 flex justify-center items-center'> <img className="w-8 h-8 rounded-full mx-2" src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" alt="" srcset="" /> <p>Continue with Google</p></button>
             </form>
         </div>
     </div>
