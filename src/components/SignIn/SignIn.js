@@ -51,7 +51,7 @@ const SignIn = () => {
                     <p className='px-6'>Or</p>
                     <div className='bg-gray-500 w-3/6 h-[0.5px]'></div>
                 </div>
-                <button onClick={()=>signInWithGoogle(navigate("/"))} className='pointer w-full border border-gray-300 px-4 py-2 shadow-md bg-white rounded-md text-center mt-2 flex justify-center items-center'> <img className="w-8 h-8 rounded-full mx-2" src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" alt="" srcset="" /> <p>Continue with Google</p></button>
+                <button onClick={()=>signInWithGoogle()} className='pointer w-full border border-gray-300 px-4 py-2 shadow-md bg-white rounded-md text-center mt-2 flex justify-center items-center'> <img className="w-8 h-8 rounded-full mx-2" src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" alt="" srcset="" /> <p>Continue with Google</p></button>
             </form>
         </div>
     </div>

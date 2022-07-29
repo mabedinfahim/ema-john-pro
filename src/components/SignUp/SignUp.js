@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import app from '../../firebase.init';
 import { getAuth } from 'firebase/auth';
@@ -27,19 +27,19 @@ const SignUp = () => {
     }
 
     const navigate=useNavigate();
-
+    const location=useLocation();
+    const from = location.state?.from?.pathname || "/shop"
     const handelWithSubmit=(e)=>{
         e.preventDefault();
         if(password !== confirmPassword){
             return;
         }
         createUserWithEmailAndPassword(email,password)
-        // navigate("/shop")
+        .then(()=>{
+            navigate(from,{replace:true})
+        })
     }
 
-    // const handelWithGoogle=()=>{
-    //    signInWithGoogle()
-    // }
     return (
         <div className="flex justify-center items-center py-10">
             <div className="w-[350px] border border-gray-200 bg-white shadow-md rounded-md px-10 py-6">
