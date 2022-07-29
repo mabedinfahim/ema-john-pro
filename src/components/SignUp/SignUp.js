@@ -34,7 +34,7 @@ const SignUp = () => {
             return;
         }
         createUserWithEmailAndPassword(email,password)
-        navigate("/shop")
+        // navigate("/shop")
     }
 
     // const handelWithGoogle=()=>{

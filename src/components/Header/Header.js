@@ -1,7 +1,7 @@
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import app from '../../firebase.init';
 import logo from '../../images/Logo.svg';
 import './Header.css';
@@ -9,19 +9,14 @@ import './Header.css';
 
 const auth=getAuth(app)
 const Header = () => {
-    // const [user,setUser]=useState()
-
-    // useEffect(()=>{
-    //     onAuthStateChanged(auth,user=>{
-    //         if(user){
-    //             setUser(user)
-    //         }
-    //     })
-    // },[])
     const [user]=useAuthState(auth)
+    const navigate=useNavigate();
 
-    const handelWithSignOut=()=>{
+    const handelWithSignOut=({children})=>{
         signOut(auth)
+        .then(()=>{
+            navigate('/sign-in')
+        })
     }
     return (
         <nav className='header'>

@@ -1,4 +1,5 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import useCart from '../../hooks/useCart';
 import useProducts from '../../hooks/useProducts';
@@ -31,7 +32,7 @@ const Orders = () => {
             </div>
             <div className="cart-container">
                 <Cart cart={cart}>
-                        <button className="px-2 py-1 text-white bg-yellow-500  rounded-md my-4" onClick={()=>navigate('/inventory')}>Proceed Information </button>
+                        <button className="px-2 py-1 text-white bg-yellow-500  rounded-md my-4" onClick={()=> {cart.length>0 ? navigate('/inventory'): toast.error('Please select at least one item')}}>Proceed Information </button>
                 </Cart>
             </div>
         </div>

@@ -10,11 +10,13 @@ import RequireAuth from './components/RequireAuth/RequireAuth';
 import Shop from './components/Shop/Shop';
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <div>
       <Header></Header>
+      <Toaster/>
       <Routes>
         <Route path='/' element={<Shop></Shop>}></Route>
         <Route path='/shop' element={<Shop></Shop>}></Route>
