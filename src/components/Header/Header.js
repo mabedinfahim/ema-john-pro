@@ -5,6 +5,7 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import app from '../../firebase.init';
 import logo from '../../images/Logo.svg';
 import './Header.css';
+import toast from 'react-hot-toast'
 
 
 const auth=getAuth(app)
@@ -16,6 +17,7 @@ const Header = () => {
         signOut(auth)
         .then(()=>{
             navigate('/sign-in')
+            toast.success("Sign-out successfully")
         })
     }
     return (

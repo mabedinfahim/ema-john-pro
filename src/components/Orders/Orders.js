@@ -32,7 +32,7 @@ const Orders = () => {
             </div>
             <div className="cart-container">
                 <Cart cart={cart}>
-                        <button className="px-2 py-1 text-white bg-yellow-500  rounded-md my-4" onClick={()=> {cart.length>0 ? navigate('/inventory'): toast.error('Please select at least one item')}}>Proceed Information </button>
+                        <button className="px-4 py-1 text-white text-md uppercase font-sans font-semibold bg-yellow-500  rounded-md my-4" onClick={()=> {cart.length>0 ? navigate('/inventory'): toast.error('Please select at least one item')}}>Proceed</button>
                 </Cart>
             </div>
         </div>

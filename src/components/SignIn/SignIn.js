@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import app from '../../firebase.init';
+import toast from 'react-hot-toast';
 
 const auth=getAuth(app)
 const SignIn = () => {
@@ -28,6 +29,7 @@ const SignIn = () => {
         signInWithEmailAndPassword(email,password)
         .then(res=>{
             navigate(from,{replace:true})
+            toast.success("Sign-in successful")
         })
     }
 
