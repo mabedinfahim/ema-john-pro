@@ -9,6 +9,7 @@ import './Shop.css';
 const Shop = () => {
     const [products, setProducts] = useProducts();
     const [cart, setCart] = useState([]);
+    console.log(cart)
 
     useEffect( () =>{
         const storedCart = getStoredCart();

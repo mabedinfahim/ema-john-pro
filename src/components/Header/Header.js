@@ -16,8 +16,8 @@ const Header = () => {
     const handelWithSignOut=({children})=>{
         signOut(auth)
         .then(()=>{
-            navigate('/sign-in')
             toast.success("Sign-out successfully")
+            navigate("/sign-in")
         })
     }
     return (

@@ -24,11 +24,14 @@ const SignIn = () => {
         setPassword(event.target.value)
     }
 
+    if(user){
+        navigate(from,{replace:true})
+    }
+
     const handelWithSubmit=(e)=>{
         e.preventDefault()
         signInWithEmailAndPassword(email,password)
-        .then(res=>{
-            navigate(from,{replace:true})
+        .then(()=>{
             toast.success("Sign-in successful")
         })
     }
