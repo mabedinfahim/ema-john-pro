@@ -9,7 +9,7 @@ import './Shop.css';
 const Shop = () => {
     const [cart, setCart] = useState([]);
     const [pageCount,setPageCount]=useState(0);
-    const [page,setPage]=useState(0)
+    const [page,setPage]=useState(1)
     const [products, setProducts] = useState([]);
 
     useEffect( () =>{
