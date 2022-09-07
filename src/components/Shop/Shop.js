@@ -7,9 +7,16 @@ import Product from '../Product/Product';
 import './Shop.css';
 
 const Shop = () => {
-    const [products, setProducts] = useProducts();
     const [cart, setCart] = useState([]);
-    console.log(cart)
+    const [pageCount,setPageCount]=useState(0);
+    const [page,setPage]=useState(1)
+    const [products, setProducts] = useState([]);
+
+    useEffect( () =>{
+        fetch(`http://localhost:5000/products?page=${page}`)
+        .then(res => res.json())
+        .then(data => setProducts(data));
+    }, [page]);
 
     useEffect( () =>{
         const storedCart = getStoredCart();
@@ -42,6 +49,16 @@ const Shop = () => {
         addToDb(selectedProduct._id);
     }
 
+    useEffect( () =>{
+        fetch("http://localhost:5000/productCount")
+        .then(res=>res.json())
+        .then(data=>{
+            const count=data.count;
+            const page=Math.ceil(count/10);
+            setPageCount(page);
+        })
+    })
+
     return (
         <div className='shop-container'>
             <div className="products-container">
@@ -52,7 +69,11 @@ const Shop = () => {
                     handleAddToCart={handleAddToCart}
                     ></Product>)}</> : <h1 className="text-4xl text-center">Loading...</h1>
                 }
+                 <div>
+                    {[...Array(pageCount).keys()].map(number=><button onClick={()=>setPage(number+1)} className={page===number+1?"bg-yellow-500 border-2 px-4 mr-2 text-white":"border-2 px-4 mr-2"}>{number+1}</button>)}
+                </div>
             </div>
+           
             <div className="cart-container">
                 <Cart cart={cart}>
                     <Link to="/orders">

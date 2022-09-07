@@ -14,9 +14,9 @@ const Product = ({product, handleAddToCart}) => {
                 <p className='product-name'>{name}</p>
                 <p>Price: ${price}</p>
                 <p><small>Seller: {seller}</small></p>
-                <p><small>Ratings: {ratings} stars</small></p>
+                <p><FontAwesomeIcon icon="fa-solid fa-star" /><small>Ratings: {ratings} stars</small></p>
             </div>
-            <button onClick={() => handleAddToCart(product)} className='btn-cart'>
+            <button onClick={() => handleAddToCart(product)} className='btn-cart py-2 focus:text-white focus:bg-yellow-500'>
                 <p className='btn-text'>Add to Cart</p>
                 <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>
             </button>
