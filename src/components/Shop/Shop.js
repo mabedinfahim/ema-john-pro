@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import useProducts from '../../hooks/useProducts';
 import { addToDb, getStoredCart } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
@@ -70,7 +69,7 @@ const Shop = () => {
                     ></Product>)}</> : <h1 className="text-4xl text-center">Loading...</h1>
                 }
                  <div>
-                    {[...Array(pageCount).keys()].map(number=><button onClick={()=>setPage(number+1)} className={page===number+1?"bg-yellow-500 border-2 px-4 mr-2 text-white":"border-2 px-4 mr-2"}>{number+1}</button>)}
+                    {[...Array(pageCount).keys()].map(number=><button onClick={()=>setPage(number)} className={page===number?"bg-yellow-500 border-2 px-4 mr-2 text-white":"border-2 px-4 mr-2"}>{number+1}</button>)}
                 </div>
             </div>
            
